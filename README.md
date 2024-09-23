@@ -1,8 +1,10 @@
 ### OpenRelik worker for running Hayabusa on input files
 
-### Installation instructions
-Add to your docker-compose configuration:
+This worker use the tool `hayabusa` from Yamato-Security.
+https://github.com/Yamato-Security/hayabusa for more information.
 
+#### Installation instructions
+Add to your docker-compose configuration:
 ```
   openrelik-worker-hayabusa:
     container_name: openrelik-worker-hayabusa
@@ -14,3 +16,6 @@ Add to your docker-compose configuration:
       - ./data:/usr/share/openrelik/data
     command: "celery --app=src.app worker --task-events --concurrency=4 --loglevel=INFO -Q openrelik-worker-hayabusa"
 ```
+
+##### Obligatory Fine Print
+This is not an official Google product (experimental or otherwise), it is just code that happens to be owned by Google.
