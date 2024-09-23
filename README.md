@@ -1,7 +1,7 @@
 ### OpenRelik worker for running Hayabusa on input files
 
 This worker use the tool `hayabusa` from Yamato-Security.
-https://github.com/Yamato-Security/hayabusa for more information.
+See https://github.com/Yamato-Security/hayabusa for more information.
 
 #### Installation instructions
 Add to your docker-compose configuration:
