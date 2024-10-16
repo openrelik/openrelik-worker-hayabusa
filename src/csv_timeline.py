@@ -51,8 +51,8 @@ def csv_timeline(
 
     output_file = create_output_file(
         output_path,
-        filename="Hayabusa_CSV_timeline.csv",
-        data_type="openrelik:worker:hayabusa:file:csv",
+        display_name="Hayabusa_CSV_timeline.csv",
+        data_type="openrelik:hayabusa:csv_timeline",
     )
 
     # Create temporary directory and hard link files for processing
