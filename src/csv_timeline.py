@@ -34,6 +34,12 @@ TASK_METADATA = {
     "description": "Windows event log triage",
 }
 
+COMPATIBLE_INPUTS = {
+    "data_types": [],
+    "mime_types": ["application/x-ms-evtx"],
+    "filenames": ["*.evtx"],
+}
+
 
 @celery.task(bind=True, name=TASK_NAME, metadata=TASK_METADATA)
 def csv_timeline(
@@ -44,7 +50,12 @@ def csv_timeline(
     workflow_id=None,
     task_config={},
 ) -> str:
-    input_files = get_input_files(pipe_result, input_files or [])
+    input_files = get_input_files(
+        pipe_result, input_files or [], filter=COMPATIBLE_INPUTS
+    )
+    if not input_files:
+        raise RuntimeError("No compatible input files")
+
     output_files = []
 
     output_file = create_output_file(
