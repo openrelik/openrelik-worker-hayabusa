@@ -21,9 +21,7 @@ from uuid import uuid4
 from openrelik_worker_common.file_utils import create_output_file
 from openrelik_worker_common.task_utils import create_task_result, get_input_files
 
-
 from .app import celery
-
 
 # Task name used to register and route the task to the correct queue.
 TASK_NAME = "openrelik-worker-hayabusa.tasks.csv_timeline"
@@ -50,9 +48,7 @@ def csv_timeline(
     workflow_id=None,
     task_config={},
 ) -> str:
-    input_files = get_input_files(
-        pipe_result, input_files or [], filter=COMPATIBLE_INPUTS
-    )
+    input_files = get_input_files(pipe_result, input_files or [], filter=COMPATIBLE_INPUTS)
     if not input_files:
         raise RuntimeError("No compatible input files")
 
