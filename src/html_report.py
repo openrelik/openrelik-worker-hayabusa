@@ -32,6 +32,15 @@ TASK_NAME = "openrelik-worker-hayabusa.tasks.html_report"
 TASK_METADATA = {
     "display_name": "Hayabusa HTML report",
     "description": "Windows event log triage",
+    "task_config": [
+        {
+            "name": "output_file_name",
+            "label": "Output file name",
+            "description": "Custom name for the output HTML file (without extension).",
+            "type": "text",
+            "required": False,
+        },
+    ],
 }
 
 COMPATIBLE_INPUTS = {
@@ -57,9 +66,18 @@ def html_report(
         raise RuntimeError("No compatible input files")
     output_files = []
 
+
+    # Determine output file name from task_config if provided
+    custom_name = None
+    if task_config and task_config.get("output_file_name"):
+        custom_name = task_config["output_file_name"].strip()
+        if custom_name.endswith(".html"):
+            custom_name = custom_name[:-5]
+
+    display_name = f"{custom_name}.html" if custom_name else "Hayabusa_HTML_report.html"
     output_file = create_output_file(
         output_path,
-        display_name="Hayabusa_HTML_report.html",
+        display_name=display_name,
         data_type="openrelik:hayabusa:html_report",
     )
 
