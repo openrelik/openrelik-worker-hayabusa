@@ -30,6 +30,15 @@ TASK_NAME = "openrelik-worker-hayabusa.tasks.csv_timeline"
 TASK_METADATA = {
     "display_name": "Hayabusa CSV timeline",
     "description": "Windows event log triage",
+    "task_config": [
+        {
+            "name": "output_file_name",
+            "label": "Output file name",
+            "description": "Custom name for the output CSV file (without extension).",
+            "type": "text",
+            "required": False,
+        },
+    ],
 }
 
 COMPATIBLE_INPUTS = {
@@ -54,9 +63,18 @@ def csv_timeline(
 
     output_files = []
 
+
+    # Determine output file name from task_config if provided
+    custom_name = None
+    if task_config and task_config.get("output_file_name"):
+        custom_name = task_config["output_file_name"].strip()
+        if custom_name.endswith(".csv"):
+            custom_name = custom_name[:-4]
+
+    display_name = f"{custom_name}.csv" if custom_name else "Hayabusa_CSV_timeline.csv"
     output_file = create_output_file(
         output_path,
-        display_name="Hayabusa_CSV_timeline.csv",
+        display_name=display_name,
         data_type="openrelik:hayabusa:csv_timeline",
     )
 
