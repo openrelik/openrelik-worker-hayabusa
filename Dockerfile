@@ -32,7 +32,7 @@ ENV VIRTUAL_ENV=/app/.venv PATH="/openrelik/.venv/bin:$PATH"
 # Install Hayabusa
 # ----------------------------------------------------------------------
 # Define a build argument for the Hayabusa version (with a default)
-ARG HAYABUSA_VERSION=3.3.0
+ARG HAYABUSA_VERSION=3.5.0
 ENV HAYABUSA_ZIP="hayabusa-${HAYABUSA_VERSION}-lin-x64-gnu.zip"
 
 # Download the specified Hayabusa release using curl
