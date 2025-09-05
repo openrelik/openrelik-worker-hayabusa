@@ -49,10 +49,15 @@ def csv_timeline(
     task_config={},
 ) -> str:
     input_files = get_input_files(pipe_result, input_files or [], filter=COMPATIBLE_INPUTS)
-    if not input_files:
-        raise RuntimeError("No compatible input files")
-
     output_files = []
+
+    if not input_files:
+        return create_task_result(
+        output_files=output_files,
+        workflow_id=workflow_id,
+        command="",
+    )
+        
 
     output_file = create_output_file(
         output_path,
@@ -94,9 +99,6 @@ def csv_timeline(
         shutil.rmtree(temp_dir)
 
     output_files.append(output_file.to_dict())
-
-    if not output_files:
-        raise RuntimeError("Hayabusa didn't create any output files")
 
     return create_task_result(
         output_files=output_files,
