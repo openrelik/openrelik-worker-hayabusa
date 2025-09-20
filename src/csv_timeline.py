@@ -59,7 +59,7 @@ def csv_timeline(
 
     output_file = create_output_file(
         output_path,
-        display_name="Hayabusa_CSV_timeline.csv",
+        extension="csv",
         data_type="openrelik:hayabusa:csv_timeline",
     )
 
